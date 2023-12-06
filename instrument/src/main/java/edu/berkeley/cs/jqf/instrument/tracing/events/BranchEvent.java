@@ -61,5 +61,10 @@ public class BranchEvent extends TraceEvent {
     @Override
     public void applyVisitor(TraceEventVisitor v) {
         v.visitBranchEvent(this);
+	System.out.print("Event ID: <");
+	System.out.print(iid);
+	System.out.print(">, branch arm: <");
+	System.out.print(arm);
+	System.out.println(">.");
     }
 }

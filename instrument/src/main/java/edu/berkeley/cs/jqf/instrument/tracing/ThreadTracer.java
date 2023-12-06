@@ -122,7 +122,19 @@ public class ThreadTracer {
      */
     protected final void emit(TraceEvent e) {
         try {
-            callback.accept(e);
+	    System.out.print("Thread <");
+	    System.out.print(tracee.getName());
+	    System.out.print("> produced an event with id <");
+	    System.out.print(e.getIid());
+	    System.out.print("> with containing method <");
+	    System.out.print(e.getContainingMethodName());
+	    System.out.println(">");
+	    System.out.print("with containing class <");
+	    System.out.print(e.getContainingClass());
+	    System.out.print("> on line number <");
+	    System.out.print(e.getLineNumber());
+	    System.out.println(">.");
+	    callback.accept(e);
         } catch (RuntimeException ex) {
             callBackException = ex;
         }
@@ -330,7 +342,7 @@ public class ThreadTracer {
 
         @Override
         public void visitConditionalBranch(Instruction ins) {
-            int iid = ins.iid;
+	    int iid = ins.iid;
             int lineNum = ins.mid;
             // The branch taken-or-not would have been set by a previous
             // GETVALUE instruction
